@@ -9,10 +9,12 @@
   },
   "scripts": {
     "commit": "git-cz",
+    "coverage": "npm test -- --coverage",
+    "postcoverage": "opn coverage/lcov-report/index.html",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "npx jest --watch",
-    "test:once": "npx jest --verbose --coverage",
     "lint": "tslint --fix --project tsconfig.json -c tslint.json 'src/**/*.{ts,tsx}' 'test/**/*.ts'",
+    "test": "jest --env=jsdom --colors --verbose",
+    "test:watch": "npm test -- --watch",
     "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
@@ -53,7 +55,7 @@
     "hooks": {
       "pre-commit": "lint-staged",
       "post-commit": "git update-index --again",
-      "pre-push": "npm run lint && npm run test"
+      "pre-push": "npm run lint && npm run test && npm run coverage"
     }
   },
   "jest": {
@@ -74,8 +76,15 @@
       "js"
     ],
     "transform": {
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest"
     },
-    "testRegex": "/*.test.(ts|tsx|js)$"
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
+      }
+    }
   }
 }
