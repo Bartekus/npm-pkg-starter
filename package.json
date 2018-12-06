@@ -10,7 +10,9 @@
   "scripts": {
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "echo \"Add tests\" && exit 0",
+    "test": "npx jest --watch",
+    "test:once": "npx jest --verbose --coverage",
+    "lint": "tslint --fix --project tsconfig.json -c tslint.json 'src/**/*.{ts,tsx}' 'test/**/*.ts'",
     "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
@@ -25,12 +27,55 @@
   "homepage": "https://github.com/Bartekus/npm-pkg-starter#readme",
   "dependencies": {},
   "devDependencies": {
-    "commitizen": "^3.0.5",
-    "cz-conventional-changelog": "^2.1.0",
-    "semantic-release": "^15.12.4",
-    "travis-deploy-once": "^5.0.9"
+    "@types/jest": "23.3.10",
+    "commitizen": "3.0.5",
+    "cz-conventional-changelog": "2.1.0",
+    "husky": "0.10.2",
+    "jest": "23.6.0",
+    "jest-cli": "23.6.0",
+    "jsdom": "13.0.0",
+    "lint-staged": "8.1.0",
+    "opn-cli": "4.0.0",
+    "semantic-release": "15.12.4",
+    "travis-deploy-once": "5.0.9",
+    "ts-jest": "23.10.5",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.17.0",
+    "typescript": "3.2.1"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-commit": "git update-index --again",
+      "pre-push": "npm run lint && npm run test"
+    }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testURL": "http://localhost/",
+    "collectCoverageFrom": ["src/**/*.{ts,tsx,js,jsx}"],
+    "roots": ["./src"],
+    "coveragePathIgnorePatterns": ["node_modules"],
+    "testPathIgnorePatterns": ["node_modules"],
+    "moduleDirectories": [
+      "src",
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "/*.test.(ts|tsx|js)$"
   }
 }
