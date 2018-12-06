@@ -1,0 +1,25 @@
+{
+  "name": "npm-pkg-starter",
+  "version": "0.0.1",
+  "description": "An npm node package starter",
+  "main": "index.js",
+  "engines": {
+    "node": "10",
+    "npm": "6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bartekus/npm-pkg-starter.git"
+  },
+  "author": "Bartek Kus <bartekus@gmail.com> (https://bartekus.com/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Bartekus/npm-pkg-starter/issues"
+  },
+  "homepage": "https://github.com/Bartekus/npm-pkg-starter#readme",
+  "dependencies": {},
+  "devDependencies": {}
+}
