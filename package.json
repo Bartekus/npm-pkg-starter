@@ -13,6 +13,7 @@
     "postcoverage": "opn coverage/lcov-report/index.html",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "lint": "tslint --fix --project tsconfig.json -c tslint.json 'src/**/*.{ts,tsx}' 'test/**/*.ts'",
+    "report": "cat ./coverage/lcov.info | codecov",
     "test": "jest --env=jsdom --colors --verbose",
     "test:watch": "npm test -- --watch",
     "travis-deploy-once": "travis-deploy-once"
@@ -30,6 +31,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "23.3.10",
+    "codecov.io": "0.1.6",
     "commitizen": "3.0.5",
     "cz-conventional-changelog": "2.1.0",
     "husky": "0.10.2",
@@ -62,10 +64,18 @@
     "preset": "ts-jest",
     "testEnvironment": "node",
     "testURL": "http://localhost/",
-    "collectCoverageFrom": ["src/**/*.{ts,tsx,js,jsx}"],
-    "roots": ["./src"],
-    "coveragePathIgnorePatterns": ["node_modules"],
-    "testPathIgnorePatterns": ["node_modules"],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx,js,jsx}"
+    ],
+    "roots": [
+      "./src"
+    ],
+    "coveragePathIgnorePatterns": [
+      "node_modules"
+    ],
+    "testPathIgnorePatterns": [
+      "node_modules"
+    ],
     "moduleDirectories": [
       "src",
       "node_modules"

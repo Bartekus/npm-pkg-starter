@@ -9,6 +9,7 @@ node_js:
 script:
   - npm run test
   - npm run coverage
+  - npm run report
 after_success:
   - npm run travis-deploy-once "npm run semantic-release"
 branches:
