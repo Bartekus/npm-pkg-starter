@@ -6,12 +6,15 @@ notifications:
   email: false
 node_js:
   - '10'
-script:
-  - npm run test
-  - npm run coverage
-  - npm run report
-after_success:
-  - npm run travis-deploy-once "npm run semantic-release"
 branches:
   only:
     - master
+script:
+  - npm prune
+  - npm run lint
+  - npm run coverage
+  - npm run report
+  - npm run build
+after_success:
+  - npm install -g travis-deploy-once
+  - travis-deploy-once "npm run semantic-release"

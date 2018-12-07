@@ -1,7 +1,17 @@
+import TimeReporter from './index'
+import { EOL } from 'os';
 
-describe('index.test.js', () => {
+const printer = (s) => console.log('The time is: ' +  s + EOL);
 
-  it('should be true, when its true', async () => {
-    expect(true).toBe(true);
-  })
+/**
+ * TimeReporter test
+ */
+describe('TimeReporter test', () => {
+  it('works if true is truthy', () => {
+    expect(true).toBeTruthy()
+  });
+
+  it('TimeReporter is instantiable', () => {
+    expect(new TimeReporter(printer)).toBeInstanceOf(TimeReporter)
+  });
 });
